@@ -10,4 +10,8 @@ def home():
 
 @imp_bp.route('/', methods=['POST'])
 def add():
-    return "agregar imparte"
+    return  ImparteController.add()
+
+@imp_bp.route('/<uuid>', methods=['DELETE'])
+def delete(uuid):
+    return imparteController.delete(uuid)
