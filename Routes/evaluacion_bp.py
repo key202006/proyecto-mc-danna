@@ -10,4 +10,4 @@ def home():
 
 @eva_bp.route('/', methods=['POST'])
 def add():
-    return EvaluacionController.add()
+    return "agregar evaluacion"
