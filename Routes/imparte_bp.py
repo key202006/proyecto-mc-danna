@@ -10,4 +10,4 @@ def home():
 
 @imp_bp.route('/', methods=['POST'])
 def add():
-    return ImparteController.add()
+    return "agregar evaluacion"
