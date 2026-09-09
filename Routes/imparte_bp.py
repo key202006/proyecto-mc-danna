@@ -10,4 +10,4 @@ def home():
 
 @imp_bp.route('/', methods=['POST'])
 def add():
-    return "agregar evaluacion"
+    return "agregar imparte"
