@@ -10,4 +10,4 @@ def home():
 
 @mat_bp.route('/', methods=['POST'])
 def add():
-    return MatriculaController.add()
+    return "agregar matricula"
