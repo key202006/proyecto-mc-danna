@@ -10,4 +10,4 @@ def home():
 
 @ins_bp.route('/', methods=['POST'])
 def add():
-    return InstructorController.add()
+    return "agregar Instructor"
