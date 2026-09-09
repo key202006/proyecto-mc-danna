@@ -11,4 +11,4 @@ def home():
 
 @cur_bp.route('/', methods=['POST'])
 def add():
-    return CursoController.add()
+    return "agregar curso"
