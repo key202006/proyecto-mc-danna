@@ -1,16 +1,16 @@
 # blueprint
 from flask import Blueprint
-from Controllers.ImparteController import ImparteController
+from Controllers.imparteContoller import imparteController
 
 imp_bp = Blueprint('imp_bp', __name__)
 
 @imp_bp.route('/', methods=['GET'])
 def home():
-    return ImparteController.show()
+    return imparteController.show()
 
 @imp_bp.route('/', methods=['POST'])
 def add():
-    return  ImparteController.add()
+    return  imparteController.add()
 
 @imp_bp.route('/<uuid>', methods=['DELETE'])
 def delete(uuid):

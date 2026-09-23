@@ -1,5 +1,5 @@
 from flask import current_app
-from Model.matricula import Imparte
+from Models.imparte import Imparte
 
 
 def show():

@@ -1,16 +1,16 @@
 # blueprint
 from flask import Blueprint
-from Controllers.EvaluacionController import EvaluacionController
+from Controllers.evaluacionController import evaluacionController
 
 eva_bp = Blueprint('eva_bp', __name__)
 
 @eva_bp.route('/', methods=['GET'])
 def home():
-    return EvaluacionController.show()
+    return evaluacionController.show()
 
 @eva_bp.route('/', methods=['POST'])
 def add():
-    return EvaluacionController.add()
+    return evaluacionController.add()
 
 @eva_bp.route('/<uuid>', methods=['DELETE'])
 def delete(uuid):

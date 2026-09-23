@@ -1,5 +1,5 @@
 from flask import current_app
-from Model.matricula import Matricula
+from Models.matricula import Matricula
 
 def show():
     sql = "SELECT * FROM T_MATRICULA"
