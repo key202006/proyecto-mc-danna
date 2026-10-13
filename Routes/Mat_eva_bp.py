@@ -6,7 +6,8 @@ mate_bp = Blueprint('mate_bp', __name__)
 
 @mate_bp.route('/', methods=['GET'])
 def home():
-    matEvaController.show()
+    return matEvaController.show()
+    
 
 @mate_bp.route('/', methods=['POST'])
 def add():

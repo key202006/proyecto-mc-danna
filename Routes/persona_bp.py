@@ -6,7 +6,7 @@ per_bp = Blueprint('per_bp', __name__)
 
 @per_bp.route('/', methods=['GET'])
 def home():
-    personaController.show()
+    return personaController.show()
 
 @per_bp.route('/', methods=['POST'])
 def add():

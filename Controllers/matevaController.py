@@ -6,6 +6,7 @@ class matEvaController:
 
     def show():
         data = MatEva.show()
+        return jsonify(data),200
 
     def add():
         data = request.get_json()
@@ -15,7 +16,6 @@ class matEvaController:
             return jsonify({"faltan parametros": faltantes}), 400
                 #data = aprendizService.add()
             return jsonify(data), 201
-    
         
     def delete(uuid):
         x = MatEva.delete(uuid)

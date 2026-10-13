@@ -5,6 +5,7 @@ class cursoController:
 
     def show():
         data = cursoService.show()
+        return jsonify(data),200
 
     def add():
          data = request.get_json()

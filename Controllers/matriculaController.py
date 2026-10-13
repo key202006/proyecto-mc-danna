@@ -6,6 +6,7 @@ class matriculaController:
 
     def show():
         data = Matricula.show()
+        return jsonify(data),200
 
     def add():
         data = request.get_json()

@@ -1,5 +1,6 @@
 from flask import current_app
 from Models.MatEva import MatEva
+import uuid
 
 def show():
     sql = "SELECT * FROM T_MAT_EVA"
@@ -20,7 +21,7 @@ def delete(uuid):
         if c.rowcount > 0 :
              codigo = 200
         else:
-             codigp = 404
+             codigo = 404
 
 
         c.close()

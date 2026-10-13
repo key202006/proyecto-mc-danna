@@ -1,6 +1,7 @@
 from flask import jsonify, request
 from Services.aprendicesService import aprendizService
 from Services.persona import Persona
+import uuid
 
 class aprendizController:
 

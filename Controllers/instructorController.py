@@ -7,6 +7,7 @@ class instructorController:
 
     def show():
         data = Instructor.show()
+        return jsonify(data),200
 
     
     def add():

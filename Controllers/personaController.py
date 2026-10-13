@@ -6,6 +6,7 @@ class personaController:
 
     def show():
         data = Persona.show()
+        return jsonify(data),200
 
     def add():
         data = request.get_json()
@@ -14,7 +15,7 @@ class personaController:
         if len(faltantes) > 0:
             return jsonify({"faltan parametros": faltantes}), 400
                 #data = aprendizService.add()
-            return jsonify(data), 201
+        return jsonify(data), 201
     
         
     def delete(uuid):
