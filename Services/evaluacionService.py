@@ -8,7 +8,7 @@ class evaluacionService:
         uuid_eva = uuid.uuid4()
         c = current_app.mysql.connection.cursor()
         sql = """
-            INSERT INTO T_EVALAUCION (EVA_UUID, EVA_NOMBRE, EVA_CODIGO, EVA_PORCENTAJE, EVA_FECHA) 
+            INSERT INTO T_EVALUACION (EVA_UUID, EVA_NOMBRE, EVA_CODIGO, EVA_PORCENTAJE, EVA_FECHA) 
             VALUES (%s, %s, %s, %s, %s)"""
         c.execute(sql, (uuid_eva, data["nombre"], data["codigo"], data["porcentaje"], data["fecha"]))
         c.connection.commit()
@@ -19,7 +19,7 @@ class evaluacionService:
     
     def delete(uuid):
         c = current_app.mysql.connection.cursor()
-        sql = "DELETE FROM T_EVALAUCION WHERE EVA_UUID = %s"
+        sql = "DELETE FROM T_EVALUACION WHERE EVA_UUID = %s"
         c.execute(sql, [uuid])
         c.connection.commit()
         codigo = 200 if c.rowcount > 0 else 404
@@ -29,7 +29,7 @@ class evaluacionService:
     def update(uuid, data):
         c = current_app.mysql.connection.cursor()
         sql = """
-            UPDATE T_EVALAUCION 
+            UPDATE T_EVALUACION 
             SET EVA_NOMBRE = %s, EVA_CODIGO = %s, EVA_PORCENTAJE = %s, EVA_FECHA = %s 
             WHERE EVA_UUID = %s"""
         c.execute(sql, (data["nombre"], data["codigo"], data["porcentaje"], data["fecha"], uuid))
@@ -40,7 +40,7 @@ class evaluacionService:
 
 
     def show():
-        sql = "SELECT * FROM T_EVALAUCION"
+        sql = "SELECT * FROM T_EVALUACION"
         c = current_app.mysql.connection.cursor()
         c.execute(sql)
         data = c.fetchall()

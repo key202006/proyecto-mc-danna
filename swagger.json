@@ -1,40 +1,67 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "API de MISCELANEA 3.0",
+    "title": "API de Institución",
     "description": "API REST para gestión de usuarios y eventos.",
     "version": "2.0.0"
   },
+
   "servers": [
     {
       "url": "http://127.0.0.1:5000"
     }
   ],
+
   "tags": [
-    {
-      "name": "Usuarios",
+    {  
+      "name": "Personas",
+      "description": "Gestión de personas"
+    },
+    {  
+      "name": "Aprendices",
       "description": "Gestión de aprendices"
     },
     {
-      "name": "Eventos",
-      "description": "Gestión de eventos"
+      "name": "Instructores",
+      "description": "Gestión de instructores"
+    },
+    {
+      "name": "Cursos",
+      "description": "Gestión de cursos"
+    },
+    {
+      "name": "Imparte",
+      "description": "Gestión de asignación de cursos a instructores"
+    },
+    {
+      "name": "Evaluaciones",
+      "description": "Gestión de evaluaciones"
+    },
+    {
+      "name": "Matriculas",
+      "description": "Gestión de matrículas"
+    },
+    {
+      "name": "MatEva",
+      "description": "Gestión de resultados de evaluación de matrícula"
     }
   ],
+
   "paths": {
-    
-    "/usuarios": {
+    "/personas": {
       "get": {
-        "tags": ["Usuarios"],
-        "summary": "Listar usuarios",
+        "tags": ["Personas"],
+        "summary": "Listar personas",
         "responses": {
           "200": {
-            "description": "Lista de usuarios"
+            "description": "Lista de personas"
           }
         }
       },
+
       "post": {
-        "tags": ["Usuarios"],
-        "summary": "Crear usuario",
+        "tags": ["Personas"],
+        "summary": "Crear persona",
         "requestBody": {
           "required": true,
           "content": {
@@ -42,10 +69,21 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nombre": { "type": "string" },
-                  "genero": { "type": "string" },
-                  "frm": { "type": "string" },
-                  "numdoc": { "type": "string" }
+                  "primer nombre": {
+                    "type": "string"
+                  },
+                  "segundo nombre": {
+                    "type": "string"
+                  },
+                  "primer apellido": {
+                    "type": "string"
+                  },
+                  "segundo apellido": {
+                    "type": "string"
+                  },
+                  "documento": {
+                    "type": "integer"
+                  }
                 }
               }
             }
@@ -53,42 +91,47 @@
         },
         "responses": {
           "201": {
-            "description": "Usuario creado"
+            "description": "Persona creada"
           }
         }
       }
     },
 
-    "/usuarios/{id}": {
+    "/personas/{uuid}": {
       "get": {
-        "tags": ["Usuarios"],
-        "summary": "Obtener usuario por ID",
+        "tags": ["Personas"],
+        "summary": "Obtener persona por UUID",
         "parameters": [
           {
-            "name": "id",
+            "name": "uuid",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Usuario encontrado"
+            "description": "Persona encontrada"
           },
           "404": {
-            "description": "Usuario no encontrado"
+            "description": "Persona no encontrada"
           }
         }
       },
+
       "patch": {
-        "tags": ["Usuarios"],
-        "summary": "Actualizar usuario",
+        "tags": ["Personas"],
+        "summary": "Actualizar persona",
         "parameters": [
           {
-            "name": "id",
+            "name": "uuid",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
@@ -98,10 +141,21 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nombre": { "type": "string" },
-                  "genero": { "type": "string" },
-                  "frm": { "type": "string" },
-                  "numdoc": { "type": "string" }
+                  "primer nombre": {
+                    "type": "string"
+                  },
+                  "segundo nombre": {
+                    "type": "string"
+                  },
+                  "primer apellido": {
+                    "type": "string"
+                  },
+                  "segundo apellido": {
+                    "type": "string"
+                  },
+                  "documento": {
+                    "type": "integer"
+                  }
                 }
               }
             }
@@ -109,42 +163,46 @@
         },
         "responses": {
           "200": {
-            "description": "Usuario actualizado"
+            "description": "Persona actualizada"
           }
         }
       },
+
       "delete": {
-        "tags": ["Usuarios"],
-        "summary": "Eliminar usuario",
+        "tags": ["Personas"],
+        "summary": "Eliminar persona",
         "parameters": [
           {
-            "name": "id",
+            "name": "uuid",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Usuario eliminado"
+            "description": "Persona eliminada"
           }
         }
       }
     },
 
-    "/eventos": {
+    "/aprendices": {
       "get": {
-        "tags": ["Eventos"],
-        "summary": "Listar eventos",
+        "tags": ["Aprendices"],
+        "summary": "Listar aprendices",
         "responses": {
           "200": {
-            "description": "Lista de eventos"
+            "description": "Lista de aprendices"
           }
         }
       },
+
       "post": {
-        "tags": ["Eventos"],
-        "summary": "Crear evento",
+        "tags": ["Aprendices"],
+        "summary": "Crear aprendiz",
         "requestBody": {
           "required": true,
           "content": {
@@ -152,9 +210,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nombre": { "type": "string" },
-                  "fecha": { "type": "string", "format": "date" },
-                  "lugar": { "type": "string" }
+                  "fecha de nacimiento": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "per_id": {
+                    "type": "integer"
+                  }
                 }
               }
             }
@@ -162,68 +224,904 @@
         },
         "responses": {
           "201": {
-            "description": "Evento creado"
+            "description": "Aprendiz creado"
           }
         }
       }
     },
 
-    "/eventos/{id}": {
+    "/aprendices/{uuid}": {
       "get": {
-        "tags": ["Eventos"],
-        "summary": "Obtener evento por ID",
+        "tags": ["Aprendices"],
+        "summary": "Obtener aprendiz por UUID",
         "parameters": [
           {
-            "name": "id",
+            "name": "uuid",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Evento encontrado"
+            "description": "Aprendiz encontrado"
           },
           "404": {
-            "description": "Evento no encontrado"
+            "description": "Aprendiz no encontrado"
           }
         }
       },
+
       "patch": {
-        "tags": ["Eventos"],
-        "summary": "Actualizar evento",
+        "tags": ["Aprendices"],
+        "summary": "Actualizar aprendiz",
         "parameters": [
           {
-            "name": "id",
+            "name": "uuid",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fecha de nacimiento": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "per_id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "Evento actualizado"
+            "description": "Aprendiz actualizado"
           }
         }
       },
+
       "delete": {
-        "tags": ["Eventos"],
-        "summary": "Eliminar evento",
+        "tags": ["Aprendices"],
+        "summary": "Eliminar aprendiz",
         "parameters": [
           {
-            "name": "id",
+            "name": "uuid",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Evento eliminado"
+            "description": "Aprendiz eliminado"
+          }
+        }
+      }
+    },
+
+    "/instructores": {
+      "get": {
+        "tags": ["Instructores"],
+        "summary": "Listar instructores",
+        "responses": {
+          "200": {
+            "description": "Lista de instructores"
+          }
+        }
+      },
+
+      "post": {
+        "tags": ["Instructores"],
+        "summary": "Crear instructor",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "especialidad": {
+                    "type": "string"
+                  },
+                  "per_id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Instructor creado"
+          }
+        }
+      }
+    },
+
+    "/instructores/{uuid}": {
+      "get": {
+        "tags": ["Instructores"],
+        "summary": "Obtener instructor por UUID",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instructor encontrado"
+          },
+          "404": {
+            "description": "Instructor no encontrado"
+          }
+        }
+      },
+
+      "patch": {
+        "tags": ["Instructores"],
+        "summary": "Actualizar instructor",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "especialidad": {
+                    "type": "string"
+                  },
+                  "per_id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Instructor actualizado"
+          }
+        }
+      },
+
+      "delete": {
+        "tags": ["Instructores"],
+        "summary": "Eliminar instructor",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instructor eliminado"
+          }
+        }
+      }
+    },
+
+    "/cursos": {
+      "get": {
+        "tags": ["Cursos"],
+        "summary": "Listar cursos",
+        "responses": {
+          "200": {
+            "description": "Lista de cursos"
+          }
+        }
+      },
+
+      "post": {
+        "tags": ["Cursos"],
+        "summary": "Crear curso",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": {
+                    "type": "string"
+                  },
+                  "duracion": {
+                    "type": "string"
+                  },
+                  "costo": {
+                    "type": "string"
+                  },
+                  "descripcion": {
+                    "type": "string"
+                  },
+                  "codigo": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Curso creado"
+          }
+        }
+      }
+    },
+
+    "/cursos/{uuid}": {
+      "get": {
+        "tags": ["Cursos"],
+        "summary": "Obtener curso por UUID",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Curso encontrado"
+          },
+          "404": {
+            "description": "Curso no encontrado"
+          }
+        }
+      },
+
+      "patch": {
+        "tags": ["Cursos"],
+        "summary": "Actualizar curso",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": {
+                    "type": "string"
+                  },
+                  "duracion": {
+                    "type": "string"
+                  },
+                  "costo": {
+                    "type": "string"
+                  },
+                  "descripcion": {
+                    "type": "string"
+                  },
+                  "codigo": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Curso actualizado"
+          }
+        }
+      },
+
+      "delete": {
+        "tags": ["Cursos"],
+        "summary": "Eliminar curso",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Curso eliminado"
+          }
+        }
+      }
+    },
+
+    "/matriculas": {
+      "get": {
+        "tags": ["Matriculas"],
+        "summary": "Listar matriculas",
+        "responses": {
+          "200": {
+            "description": "Lista de matriculas"
+          }
+        }
+      },
+
+      "post": {
+        "tags": ["Matriculas"],
+        "summary": "Crear matricula",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": {
+                    "type": "string"
+                  },
+                  "estado": {
+                    "type": "string"
+                  },
+                  "fecha de inscripcion": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "cur_id": {
+                    "type": "integer"
+                  },
+                  "apr_id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Matricula creada"
+          }
+        }
+      }
+    },
+
+    "/matriculas/{uuid}": {
+      "get": {
+        "tags": ["Matriculas"],
+        "summary": "Obtener matricula por UUID",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Matricula encontrada"
+          },
+          "404": {
+            "description": "Matricula no encontrada"
+          }
+        }
+      },
+
+      "patch": {
+        "tags": ["Matriculas"],
+        "summary": "Actualizar matricula",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": {
+                    "type": "string"
+                  },
+                  "estado": {
+                    "type": "string"
+                  },
+                  "fecha de inscripcion": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "cur_id": {
+                    "type": "integer"
+                  },
+                  "apr_id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Matricula actualizada"
+          }
+        }
+      },
+
+      "delete": {
+        "tags": ["Matriculas"],
+        "summary": "Eliminar matricula",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Matricula eliminada"
+          }
+        }
+      }
+    },
+
+    "/evaluaciones": {
+      "get": {
+        "tags": ["Evaluaciones"],
+        "summary": "Listar evaluaciones",
+        "responses": {
+          "200": {
+            "description": "Lista de evaluaciones"
+          }
+        }
+      },
+
+      "post": {
+        "tags": ["Evaluaciones"],
+        "summary": "Crear evaluacion",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": {
+                    "type": "string"
+                  },
+                  "codigo": {
+                    "type": "string"
+                  },
+                  "fecha de realizacion": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "porcentaje": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Evaluacion creada"
+          }
+        }
+      }
+    },
+
+    "/evaluaciones/{uuid}": {
+      "get": {
+        "tags": ["Evaluaciones"],
+        "summary": "Obtener evaluacion por UUID",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Evaluacion encontrada"
+          },
+          "404": {
+            "description": "Evaluacion no encontrada"
+          }
+        }
+      },
+
+      "patch": {
+        "tags": ["Evaluaciones"],
+        "summary": "Actualizar evaluacion",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": {
+                    "type": "string"
+                  },
+                  "codigo": {
+                    "type": "string"
+                  },
+                  "fecha de realizacion": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "porcentaje": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Evaluacion actualizada"
+          }
+        }
+      },
+
+      "delete": {
+        "tags": ["Evaluaciones"],
+        "summary": "Eliminar evaluacion",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Evaluacion eliminada"
+          }
+        }
+      }
+    },
+
+    "/imparte": {
+      "get": {
+        "tags": ["Imparte"],
+        "summary": "Listar imparticiones",
+        "responses": {
+          "200": {
+            "description": "Lista de imparticiones"
+          }
+        }
+      },
+
+      "post": {
+        "tags": ["Imparte"],
+        "summary": "Crear imparticion",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "rol": {
+                    "type": "string"
+                  },
+                  "fecha de asignacion": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "cur_id": {
+                    "type": "integer"
+                  },
+                  "ins_id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Imparticion creada"
+          }
+        }
+      }
+    },
+
+    "/imparte/{uuid}": {
+      "get": {
+        "tags": ["Imparte"],
+        "summary": "Obtener imparticion por UUID",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Imparticion encontrada"
+          },
+          "404": {
+            "description": "Imparticion no encontrada"
+          }
+        }
+      },
+
+      "patch": {
+        "tags": ["Imparte"],
+        "summary": "Actualizar imparticion",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "rol": {
+                    "type": "string"
+                  },
+                  "fecha de asignacion": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "cur_id": {
+                    "type": "integer"
+                  },
+                  "ins_id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Imparticion actualizada"
+          }
+        }
+      },
+
+      "delete": {
+        "tags": ["Imparte"],
+        "summary": "Eliminar imparticion",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Imparticion eliminada"
+          }
+        }
+      }
+    },
+
+    "/mateva": {
+      "get": {
+        "tags": ["MatEva"],
+        "summary": "Listar resultados de evaluacion",
+        "responses": {
+          "200": {
+            "description": "Lista de resultados de evaluacion"
+          }
+        }
+      },
+
+      "post": {
+        "tags": ["MatEva"],
+        "summary": "Crear resultado de evaluacion",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nota": {
+                    "type": "number"
+                  },
+                  "eva_id": {
+                    "type": "integer"
+                  },
+                  "mat_id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Resultado de evaluacion creado"
+          }
+        }
+      }
+    },
+
+    "/mateva/{uuid}": {
+      "get": {
+        "tags": ["MatEva"],
+        "summary": "Obtener resultado de evaluacion por UUID",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resultado de evaluacion encontrado"
+          },
+          "404": {
+            "description": "Resultado de evaluacion no encontrado"
+          }
+        }
+      },
+
+      "patch": {
+        "tags": ["MatEva"],
+        "summary": "Actualizar resultado de evaluacion",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nota": {
+                    "type": "double"
+                  },
+                  "eva_id": {
+                    "type": "integer"
+                  },
+                  "mat_id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado de evaluacion actualizado"
+          }
+        }
+      },
+
+      "delete": {
+        "tags": ["MatEva"],
+        "summary": "Eliminar resultado de evaluacion",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resultado de evaluacion eliminado"
           }
         }
       }
     }
-
   }
 }
