@@ -1,0 +1,42 @@
+from flask import jsonify, request
+from Services.imparteService import imparteService
+
+
+class imparteController:
+
+    def show():
+        data = imparteService.show()
+        return jsonify([ x.to_dict() for x in data ]), 200
+
+    def add():
+        data = request.get_json(silent=True)
+        if not data:
+            return jsonify({"mensaje": "se esperaba un JSON en el cuerpo"}), 400
+        campos_req = ["IMP_ROL", "IMP_FECHA_ASIGNACION", "IMP_CUR_ID", "IMP_INS_ID"]
+        faltantes = [ x for x in campos_req if x not in data ]
+        if len(faltantes) > 0:
+            return jsonify({"faltan parametros": faltantes}), 400
+
+        respuesta = imparteService.add(data)
+        return jsonify(respuesta), 201
+
+    def update(uuid):
+        data = request.get_json(silent=True)
+        if not data:
+            return jsonify({"mensaje": "se esperaba un JSON en el cuerpo"}), 400
+        campos_req = ["IMP_ROL", "IMP_FECHA_ASIGNACION", "IMP_CUR_ID", "IMP_INS_ID"]
+        if len([ x for x in campos_req if x in data ]) == 0:
+            return jsonify({"mensaje": "envie al menos uno de estos campos", "campos": campos_req}), 400
+
+        x = imparteService.update(uuid, data)
+        if x == 200:
+            return jsonify({"mensaje": f"se actualizo la imparticion con uuid: {uuid}"}), 200
+        else:
+            return jsonify({"mensaje": f"no se encontro la imparticion con uuid: {uuid}"}), 404
+
+    def delete(uuid):
+        x = imparteService.delete(uuid)
+        if x == 200:
+            return jsonify({"mensaje": f"se elimino la imparticion con uuid: {uuid}"}), 200
+        else:
+            return jsonify({"mensaje": f"no se encontro la imparticion con uuid: {uuid}"}), 404
