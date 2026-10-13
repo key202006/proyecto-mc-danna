@@ -1,27 +1,51 @@
 from flask import current_app
 from Models.matricula import Matricula
-
-def show():
-    sql = "SELECT * FROM T_MATRICULA"
-    c  = current_app.mysql.connection.cursor()
-    c.execute(sql)
-    data = c.fetchall()
-    data = [ Matricula(x[0], x[1], x[2])for x in data]
-    c.close()
-    return data
+import uuid
 
 
-def delete(uuid):
+class matriculaService:
+
+    def show():
         c = current_app.mysql.connection.cursor()
-        sql = """
-            DELETE FROM T_MATRICULA WHERE APR_UUID = %s"""
-        c.execute(sql,[ uuid ])
-        c.connection.commit()
-        if c.rowcount > 0 :
-             codigo = 200
+        c.execute("SELECT MAT_ID, MAT_UUID, MAT_ESTADO, MAT_FECHA_INSCRIPCION, MAT_APR_ID, MAT_CUR_ID FROM T_MATRICULA")
+        data = c.fetchall()
+        c.close()
+        return [ Matricula(x[0], x[1], x[2], x[3], x[4], x[5]) for x in data ]
+
+    def add(data):
+        nuevo_uuid = str(uuid.uuid4())  # genera un uuid
+        c = current_app.mysql.connection.cursor()
+        sql = """INSERT INTO T_MATRICULA (MAT_UUID, MAT_ESTADO, MAT_FECHA_INSCRIPCION, MAT_APR_ID, MAT_CUR_ID)
+                 VALUES (%s, %s, %s, %s, %s)"""  # consulta parametrizada
+        c.execute(sql, (nuevo_uuid, data['MAT_ESTADO'], data['MAT_FECHA_INSCRIPCION'], data['MAT_APR_ID'], data['MAT_CUR_ID']))
+        current_app.mysql.connection.commit()  # guarda los cambios
+        id = c.lastrowid
+        c.close()
+        respuesta = {"MAT_ID": id, "MAT_UUID": nuevo_uuid}
+        respuesta.update(data)
+        return respuesta
+
+    def update(uuid, data):
+        c = current_app.mysql.connection.cursor()
+        c.execute("SELECT MAT_ID FROM T_MATRICULA WHERE MAT_UUID = %s", [uuid])
+        if c.fetchone() is None:
+            c.close()
+            return 404
+        campos = ["MAT_ESTADO", "MAT_FECHA_INSCRIPCION", "MAT_APR_ID", "MAT_CUR_ID"]
+        cambios = [ k for k in campos if k in data ]
+        sql = "UPDATE T_MATRICULA SET " + ", ".join([ k + " = %s" for k in cambios ]) + " WHERE MAT_UUID = %s"
+        c.execute(sql, [ data[k] for k in cambios ] + [uuid])
+        current_app.mysql.connection.commit()
+        c.close()
+        return 200
+
+    def delete(uuid):
+        c = current_app.mysql.connection.cursor()
+        c.execute("DELETE FROM T_MATRICULA WHERE MAT_UUID = %s", [uuid])
+        current_app.mysql.connection.commit()
+        if c.rowcount > 0:
+            codigo = 200
         else:
-             codigp = 404
-
-
+            codigo = 404
         c.close()
         return codigo
