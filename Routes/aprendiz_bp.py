@@ -5,14 +5,18 @@ from Controllers.aprendizController import aprendizController
 apr_bp = Blueprint('apr_bp', __name__)
 
 @apr_bp.route('/', methods=['GET'])
-def home():
+def show():
     return aprendizController.show()
+
 
 @apr_bp.route('/', methods=['POST'])
 def add():
-    return  aprendizController.add()
+     return aprendizController.add()
 
 @apr_bp.route('/<uuid>', methods=['DELETE'])
 def delete(uuid):
     return aprendizController.delete(uuid)
 
+@apr_bp.route('/<uuid>', methods=['PATCH'])
+def update(uuid):
+    return aprendizController.update(uuid)

@@ -1,17 +1,21 @@
-# blueprint
+# blueprint  
 from flask import Blueprint
-from Controllers.instructorController import instructorController
+from Controllers.InstructorController import InstructorController
 
-ins_bp = Blueprint('ins_bp', __name__)
+inst_bp = Blueprint('inst_bp', __name__)
 
-@ins_bp.route('/', methods=['GET'])
-def home():
-    return instructorController.show()
+@inst_bp.route('/', methods=['GET'])
+def show():
+    return InstructorController.show()
 
-@ins_bp.route('/', methods=['POST'])
+@inst_bp.route('/', methods=['POST'])
 def add():
-    return instructorController.add()
+    return InstructorController.add()
 
-@ins_bp.route('/<uuid>', methods=['DELETE'])
+@inst_bp.route('/<uuid>', methods=['DELETE'])
 def delete(uuid):
-    return instructorController.delete(uuid)
+    return InstructorController.delete(uuid)
+
+@inst_bp.route('/<uuid>', methods=['PATCH'])
+def update(uuid):
+    return InstructorController.update(uuid)

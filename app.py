@@ -2,7 +2,6 @@ from flask import Flask
 from flask_mysqldb import MySQL
 from Config import Config
 from Routes import CargarRutas
-
 app = Flask(__name__)
 # blueprint
 app.config.from_object(Config) 

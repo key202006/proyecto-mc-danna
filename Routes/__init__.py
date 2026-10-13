@@ -3,7 +3,7 @@ from .curso_bp import cur_bp
 from .evaluacion_bp import eva_bp  
 from .imparte_bp import imp_bp
 from .instructor_bp import ins_bp
-from .Mat_eva_bp import mate_bp
+from .mat_eva_bp import mate_bp
 from .matricula_bp import mat_bp
 from .persona_bp import per_bp
 from .documentacion import documentacion_bp

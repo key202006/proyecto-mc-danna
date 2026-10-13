@@ -1,17 +1,25 @@
 # blueprint  
 from flask import Blueprint
-from Controllers.personaController import personaController
+from Controllers.PersonaController import PersonaController
 
 per_bp = Blueprint('per_bp', __name__)
 
 @per_bp.route('/', methods=['GET'])
-def home():
-    return personaController.show()
+def show():
+    return PersonaController.show()
 
 @per_bp.route('/', methods=['POST'])
 def add():
-    return  personaController.add()
+    return PersonaController.add()
 
 @per_bp.route('/<uuid>', methods=['DELETE'])
 def delete(uuid):
-    return personaController.delete(uuid)
+    return PersonaController.delete(uuid)
+
+@per_bp.route('/<uuid>', methods=['PATCH'])
+def update(uuid):
+    return PersonaController.update(uuid)
+
+@per_bp.route('/<int:id>', methods=['GET'])
+def obtener_id(id):
+    return PersonaController.obtener_id(id)
