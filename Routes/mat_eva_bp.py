@@ -1,18 +1,23 @@
 # blueprint  
 from flask import Blueprint
-from Controllers.mat_evaController import matEvaController
+from Controllers.mat_evaController import mat_evaController
+
+mateva_bp = Blueprint('mateva_bp', __name__)
 
 mateva_bp = Blueprint('mateva_bp', __name__)
 
 @mateva_bp.route('/', methods=['GET'])
-def home():
-    return matEvaController.show()
-    
+def show():
+    return mat_evaController.show()
 
 @mateva_bp.route('/', methods=['POST'])
 def add():
-    return  matEvaController.add()
+    return mat_evaController.add()
 
 @mateva_bp.route('/<uuid>', methods=['DELETE'])
 def delete(uuid):
-    return matEvaController.delete(uuid)
+    return mat_evaController.delete(uuid)
+
+@mateva_bp.route('/<uuid>', methods=['PATCH'])
+def update(uuid):
+    return mat_evaController.update(uuid)
