@@ -1,20 +1,20 @@
 class Curso:
-    def __init__(self, CUR_ID, CUR_UUID, CUR_NOMBRE, CUR_CODIGO, CUR_DURACION, CUR_COSTO, CUR_DESCRIPCION):
-        self.CUR_ID = CUR_ID
-        self.CUR_UUID = CUR_UUID
-        self.CUR_NOMBRE = CUR_NOMBRE
-        self.CUR_CODIGO = CUR_CODIGO
-        self.CUR_DURACION = CUR_DURACION
-        self.CUR_COSTO = CUR_COSTO
-        self.CUR_DESCRIPCION = CUR_DESCRIPCION
+    def __init__(self, cur_id, cur_uuid, cur_nombre, cur_codigo , cur_duracion ,cur_costo ,cur_descripcion):
+        self.__cur_id = cur_id
+        self.__cur_uuid = cur_uuid
+        self.__cur_nombre = cur_nombre
+        self.__cur_codigo = cur_codigo
+        self.__cur_duracion = cur_duracion
+        self.__cur_costo = cur_costo
+        self.__cur_descripcion = cur_descripcion
 
     def to_dict(self):
         return {
-            "CUR_ID": self.CUR_ID,
-            "CUR_UUID": self.CUR_UUID,
-            "CUR_NOMBRE": self.CUR_NOMBRE,
-            "CUR_CODIGO": self.CUR_CODIGO,
-            "CUR_DURACION": self.CUR_DURACION,
-            "CUR_COSTO": self.CUR_COSTO,
-            "CUR_DESCRIPCION": self.CUR_DESCRIPCION
+            'cur_id': self.__cur_id,
+            'cur_uuid': self.__cur_uuid,
+            'cur_nombre': self.__cur_nombre,
+            'cur_codigo': self.__cur_codigo,
+            'cur_duracion': self.__cur_duracion,
+            'cur_costo': self.__cur_costo,
+            'cur_descripcion': self.__cur_descripcion
         }

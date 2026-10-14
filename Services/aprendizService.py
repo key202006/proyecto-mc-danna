@@ -1,6 +1,7 @@
 from flask import current_app
-from Models.Aprendiz import Aprendiz
+from Models.aprendiz import Aprendiz
 import uuid
+
 class aprendizService:
     # opereraciones CRUD
     # CREATE, READ, UPDATE, DELETE
@@ -55,6 +56,7 @@ class aprendizService:
         c  = current_app.mysql.connection.cursor()
         c.execute(sql)
         data = c.fetchall()
+        print(data)
         data = [  Aprendiz(x[0],x[1],x[2],x[3]).to_dict() for x in data ]
         c.close()
         return data

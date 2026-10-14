@@ -1,5 +1,5 @@
 from flask import current_app
-from Models.Persona import Persona
+from Models.persona import Persona
 import uuid
 
 class personaService:
