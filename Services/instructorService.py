@@ -1,5 +1,5 @@
 from flask import current_app
-from Models.Instructor import Instructor
+from Models.instructor import Instructor
 import uuid
 
 class instructorService:
