@@ -1,6 +1,6 @@
 # blueprint  
 from flask import Blueprint
-from Controllers.InstructorController import InstructorController
+from Controllers.instructorController import InstructorController
 
 inst_bp = Blueprint('inst_bp', __name__)
 
