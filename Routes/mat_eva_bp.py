@@ -4,8 +4,6 @@ from Controllers.mat_evaController import mat_evaController
 
 mateva_bp = Blueprint('mateva_bp', __name__)
 
-mateva_bp = Blueprint('mateva_bp', __name__)
-
 @mateva_bp.route('/', methods=['GET'])
 def show():
     return mat_evaController.show()

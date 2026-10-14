@@ -1,4 +1,4 @@
-class MatEva:
+class mateva:
     def __init__(self, MATE_ID, MATE_UUID, MATE_NOTA, MATE_EVA_ID, MATE_MAT_ID):
         self.__MATE_ID = MATE_ID
         self.__MATE_UUID = MATE_UUID
