@@ -1,5 +1,5 @@
 from flask import current_app
-from Models.aprendiz import Aprendiz
+from Models.Aprendiz import Aprendiz
 import uuid
 
 class aprendizService:

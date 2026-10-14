@@ -1,18 +1,20 @@
+
 class Imparte:
-    def __init__(self, imp_id, imp_uuid, imp_rol, imp_fecha_asignacion, imp_cur_id , imp_ins_id):
-        self.__imp_id = imp_id
-        self.__imp_uuid = imp_uuid
-        self.__imp_rol = imp_rol
-        self.__imp_fecha_asignacion = imp_fecha_asignacion
-        self.__imp_cur_id = imp_cur_id
-        self.__imp_ins_id = imp_ins_id  
+
+    def __init__(self, IMP_ID, IMP_UUID, IMP_ROL, IMP_FECHA_ASIGNACION, IMP_CUR_ID, IMP_INS_ID):
+        self.__IMP_ID               = IMP_ID
+        self.__IMP_UUID             = IMP_UUID
+        self.__IMP_ROL              = IMP_ROL
+        self.__IMP_FECHA_ASIGNACION = IMP_FECHA_ASIGNACION
+        self.__IMP_CUR_ID           = IMP_CUR_ID
+        self.__IMP_INS_ID           = IMP_INS_ID
 
     def to_dict(self):
         return {
-            'imp_id': self.__imp_id,
-            'imp_uuid': self.__imp_uuid,
-            'imp_rol': self.__imp_rol,
-            'imp_fecha_asignacion': self.__imp_fecha_asignacion,
-            'imp_cur_id': self.__imp_cur_id,
-            'imp_ins_id': self.__imp_ins_id
+            "IMP_ID": self.__IMP_ID,
+            "IMP_UUID": self.__IMP_UUID,
+            "IMP_ROL": self.__IMP_ROL,
+            "IMP_FECHA_ASIGNACION": self.__IMP_FECHA_ASIGNACION,
+            "IMP_CUR_ID": self.__IMP_CUR_ID,
+            "IMP_INS_ID": self.__IMP_INS_ID
         }

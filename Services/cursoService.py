@@ -1,5 +1,5 @@
 from flask import current_app
-from Models.curso import Curso
+from Models.Curso import Curso
 import uuid
 
 class cursoService:
