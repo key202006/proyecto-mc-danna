@@ -1,6 +1,6 @@
 # blueprint  
 from flask import Blueprint
-from Controllers.PersonaController import PersonaController
+from Controllers.personaController import PersonaController
 
 per_bp = Blueprint('per_bp', __name__)
 
