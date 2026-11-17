@@ -10,6 +10,7 @@ class PersonaController:
 
     def add():
                 data = request.get_json(silent=True)
+                print(data)
                 if data is None :
                     return jsonify({"mensaje": "json invalido"}), 400
                 campo_req = ("pri_nombre","seg_nombre","pri_apellido","seg_apellido","documento")
