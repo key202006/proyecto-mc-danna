@@ -49,9 +49,9 @@ class cursoController:
     def delete(uuid):
         x = cursoService.delete(uuid)
         if x == 200:
-            return jsonify ({"mensaje": f"se elimino el curso con uuid :{uuid}"}), 200
+            return jsonify ({"respuesta": f"se elimino el curso con uuid :{uuid}"}), 200
         else:
-            return jsonify ({"mensaje": f"curso no encontrado con el uuid :{uuid}"}), 404
+            return jsonify ({"respuesta": f"curso no encontrado con el uuid :{uuid}"}), 404
 
 
 
@@ -68,6 +68,6 @@ class cursoController:
         
         x = cursoService.update(uuid, data)
         if x == 200:
-                return jsonify({"mensaje": f"se actualizo el curso con uuid: {uuid}"}), 200
+                return jsonify({"respuesta": f"se actualizo el curso con uuid: {uuid}"}), 200
         else:
-                return jsonify({"mensaje": f"no se encontro el curso con uuid: {uuid}"}), 404
+                return jsonify({"respuesta": f"no se encontro el curso con uuid: {uuid}"}), 404
