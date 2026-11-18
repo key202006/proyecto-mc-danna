@@ -62,7 +62,7 @@ class aprendizService:
         return data
 
     def obtener_id(id):
-        sql = "SELECT * FROM T_PERSONA WHERE PER_ID = %s"
+        sql = "SELECT * FROM T_APRENDIZ WHERE PER_ID = %s"
         c  = current_app.mysql.connection.cursor()
         c.execute(sql,(id,))
         data = c.fetchone()
