@@ -1,4 +1,4 @@
-from flask import jsonify,request
+from flask import jsonify, request
 from Services.matevaService import mat_evaService
 
 
@@ -9,42 +9,36 @@ class mat_evaController:
         return jsonify(data), 200
 
     def add():
-                data = request.get_json(silent=True)
-                print(data)
-                if data is None :
-                    return jsonify({"respuesta": "json invalido"}), 400
-                campo_req = ("nota","eva_id","mat_id")
-                faltantes = [W for W in campo_req if W not in data]
+        data = request.get_json(silent=True)
+        print(data)
+        if data is None:
+            return jsonify({"respuesta": "json invalido"}), 400
         
-                if len(faltantes) > 0 :
-                    return jsonify({"respuesta":f"faltan parametros {faltantes}"}), 400
+        campo_req = ("nota", "eva_id", "mat_id")
+        faltantes = [W for W in campo_req if W not in data]
 
-                print(type(data.get("nota")))
-                if not isinstance(data.get("nota"), float):
-                    return jsonify({"respuesta":"la nota debe ser numero decimal"}), 400
+        if len(faltantes) > 0:
+            return jsonify({"respuesta": f"faltan parametros {faltantes}"}), 400
 
+        print(type(data.get("nota")))
+        if not isinstance(data.get("nota"), float):
+            return jsonify({"respuesta": "la nota debe ser numero decimal"}), 400
 
-                if not isinstance(data.get("eva_id"), int):
-                    return jsonify({"respuesta":"la eva_id debe ser numero entero"}), 400
+        if not isinstance(data.get("eva_id"), int):
+            return jsonify({"respuesta": "la eva_id debe ser numero entero"}), 400
 
-                if not isinstance(data.get("mat_id"), int):
-                    return jsonify({"respuesta":"la mat_id debe ser numero entero"}), 400
+        if not isinstance(data.get("mat_id"), int):
+            return jsonify({"respuesta": "la mat_id debe ser numero entero"}), 400
 
-
-                x = mat_evaService.add(data)
-                return jsonify({"respuesta": "se registro!!"}),201
-                
-                
+        x = mat_evaService.add(data)
+        return jsonify({"respuesta": "se registro!!"}), 201
                 
     def delete(uuid):
         x = mat_evaService.delete(uuid)
         if x == 200:
-             return jsonify ({"respuesta": f"se elimino mat_eva con el uuid:{uuid}"}),200
+            return jsonify({"respuesta": f"se elimino mat_eva con el uuid:{uuid}"}), 200
         else:
-             return jsonify({"respuesta": f"no se encontro el mat_eva con el uuid{uuid}"}),404
-
-
-        
+            return jsonify({"respuesta": f"no se encontro el mat_eva con el uuid{uuid}"}), 404
 
     def update(uuid):
         data = request.get_json()
