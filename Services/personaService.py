@@ -48,7 +48,7 @@ class personaService:
         c.close()
         return data
 
-    def obtener_id(id):
+    def get_by_id(id):
         sql = "SELECT * FROM T_PERSONA WHERE PER_ID = %s"
         c  = current_app.mysql.connection.cursor()
         c.execute(sql,(id,))
