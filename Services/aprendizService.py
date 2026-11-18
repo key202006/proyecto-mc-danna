@@ -60,3 +60,17 @@ class aprendizService:
         data = [  Aprendiz(x[0],x[1],x[2],x[3]).to_dict() for x in data ]
         c.close()
         return data
+
+    def obtener_id(id):
+        sql = "SELECT * FROM T_PERSONA WHERE PER_ID = %s"
+        c  = current_app.mysql.connection.cursor()
+        c.execute(sql,(id,))
+        data = c.fetchone()
+        if data is None:
+            return "No se encontro la persona "
+        id_per = Persona(data[0])
+        c.close()
+        return id_per
+
+
+
