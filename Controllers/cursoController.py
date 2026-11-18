@@ -31,8 +31,10 @@ class cursoController:
                 return jsonify({"respuesta": "la duracion  debe ser un numero entero "}), 400
 
 
-            if not isinstance(data.get("costo"), float):
-                return jsonify({"respuesta": "el costo debe ser un numero decimal"}), 400
+            # # if not isinstance(data.get("costo"), float):
+            # #     return jsonify({"respuesta": "el costo debe ser un numero decimal"}), 400
+            # try:
+                
 
             
             if not isinstance(data.get("descripcion"), str):
