@@ -12,24 +12,24 @@ class evaluacionController:
     def add():
             data = request.get_json(silent=True)
             if data is None :
-                return jsonify({"mensaje": "json invalido"}), 400
+                return jsonify({"respuesta": "json invalido"}), 400
             campo_req = ("nombre","codigo","porcentaje","fecha")
             faltantes = [W for W in campo_req if W not in data]
 
             if len(faltantes) > 0 :
-                return jsonify({"mensaje":f"faltan parametros {faltantes}"}), 400
+                return jsonify({"respuesta":f"faltan parametros {faltantes}"}), 400
 
             if not isinstance(data.get("nombre"), str):
-                return jsonify ({"mensaje": "el nombre es una cadena de texto"}),  400
+                return jsonify ({"respuesta": "el nombre es una cadena de texto"}),  400
 
             if not isinstance(data.get("codigo"), int):
-                return jsonify ({"mensaje":"el codigo debe ser un  numero entero"}),400
+                return jsonify ({"respuesta":"el codigo debe ser un  numero entero"}),400
 
             if not isinstance(data.get("porcentaje"), int):
-                return jsonify ({"mensaje": "el porcentaje debe ser un numero entero"}), 400
+                return jsonify ({"respuesta": "el porcentaje debe ser un numero entero"}), 400
 
             if not isinstance(data.get("fecha"), str) or not re.match(r"^\d{4}-\d{2}-\d{2}$", data.get("fecha")):
-                return jsonify({"mensaje": "el formato de fecha es invalido  debe ser yyyy-mm-dd"}), 400
+                return jsonify({"respuesta": "el formato de fecha es invalido  debe ser yyyy-mm-dd"}), 400
 
 
             x = evaluacionService.add(data)
@@ -40,9 +40,9 @@ class evaluacionController:
     def delete(uuid):
         x = evaluacionService.delete(uuid)
         if x == 200:
-             return jsonify ({"mensaje": f"se elimino la evaluacion con uuid:{uuid}"}),200
+             return jsonify ({"respuesta": f"se elimino la evaluacion con uuid:{uuid}"}),200
         else:
-            return jsonify({"mensaje": f"no se encontro la evaluacion con el uuid{uuid}"}),404
+            return jsonify({"respuesta": f"no se encontro la evaluacion con el uuid{uuid}"}),404
 
 
 
@@ -59,9 +59,9 @@ class evaluacionController:
                 
             x = evaluacionService.update(uuid, data)
             if x == 200:
-                    return jsonify({"mensaje": f"se actualizo la evaluacion con uuid: {uuid}"}), 200
+                    return jsonify({"respuesta": f"se actualizo la evaluacion con uuid: {uuid}"}), 200
             else:
-                    return jsonify({"mensaje": f"no se encontro la evaluacion con uuid: {uuid}"}), 404
+                    return jsonify({"respuesta": f"no se encontro la evaluacion con uuid: {uuid}"}), 404
 
 
 
