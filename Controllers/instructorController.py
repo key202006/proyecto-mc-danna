@@ -12,23 +12,23 @@ class InstructorController:
     def add():
                 data = request.get_json(silent=True)
                 if data is None :
-                    return jsonify({"mensaje": "json invalido"}), 400
+                    return jsonify({"respuesta": "json invalido"}), 400
                 campo_req = ("especialidad","per_id")
                 faltantes = [W for W in campo_req if W not in data]
         
                 if len(faltantes) > 0 :
-                    return jsonify({"mensaje":f"faltan parametros {faltantes}"}), 400
+                    return jsonify({"respuesta":f"faltan parametros {faltantes}"}), 400
 
 
                 if not isinstance(data.get("especialidad"), str):
-                    return jsonify({"mensaje":"la especialidad debe ser cadena de texto"}), 400
+                    return jsonify({"respuesta":"la especialidad debe ser cadena de texto"}), 400
                 
 
                 if not isinstance(data.get("per_id"), int):
-                    return jsonify({"mensaje": "el id de la persona debe ser un entero"}), 400
+                    return jsonify({"respuesta": "el id de la persona debe ser un entero"}), 400
 
                 if personaService.get_by_id(data["per_id"]) == "No se encontro la persona ":
-                            return jsonify({"mensaje": "la persona no existe"}), 400
+                            return jsonify({"respuesta": "la persona no existe"}), 400
 
 
                 x = instructorService.add(data)
@@ -37,9 +37,9 @@ class InstructorController:
     def delete(uuid):
         x = instructorService.delete(uuid)
         if x == 200:
-            return jsonify ({"mensaje": f"se elimino el instructor con uuid :{uuid}"}), 200
+            return jsonify ({"respuesta": f"se elimino el instructor con uuid :{uuid}"}), 200
         else:
-            return jsonify ({"mensaje": f"no se encontro el instructor con el uuid :{uuid}"}), 404 
+            return jsonify ({"respuesta": f"no se encontro el instructor con el uuid :{uuid}"}), 404 
 
 
         
@@ -59,6 +59,6 @@ class InstructorController:
     
         x = instructorService.update(uuid, data)
         if x == 200:
-            return jsonify({"mensaje": f"se actualizo el instructor con uuid: {uuid}"}), 200
+            return jsonify({"respuesta": f"se actualizo el instructor con uuid: {uuid}"}), 200
         else:
-            return jsonify({"mensaje": f"no se encontro el instructor con uuid: {uuid}"}), 404
+            return jsonify({"respuesta": f"no se encontro el instructor con uuid: {uuid}"}), 404
