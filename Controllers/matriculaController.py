@@ -17,24 +17,24 @@ class matriculaController:
                 faltantes = [W for W in campo_req if W not in data]
         
                 if len(faltantes) > 0 :
-                    return jsonify({"mensaje":f"faltan parametros {faltantes}"}), 400
+                    return jsonify({"respuesta":f"faltan parametros {faltantes}"}), 400
 
                 if not isinstance(data.get("estado"), str):
-                    return jsonify({"mensaje": "el estado debe ser cadena de texto"}), 400
+                    return jsonify({"respuesta": "el estado debe ser cadena de texto"}), 400
 
 
                 if not isinstance(data.get("fecha_inscripcion"), str) or not re.match(r"^\d{4}-\d{2}-\d{2}$", data.get("fecha_inscripcion")):
-                            return jsonify({"mensaje": "el formato de fecha es invalido  debe ser yyyy-mm-dd"}),400
+                            return jsonify({"respuesta": "el formato de fecha es invalido  debe ser yyyy-mm-dd"}),400
                 elif  not isinstance(data.get("fecha_inscripcion"), str):
-                            return jsonify({"mensaje": "el formato debe ser yyyy/mm/dd"}),400
+                            return jsonify({"respuesta": "el formato debe ser yyyy/mm/dd"}),400
 
 
                 if not isinstance(data.get("apr_id"), int):
-                    return jsonify({"mensaje": "el apr_id debe ser numero entero"}), 400
+                    return jsonify({"respuesta": "el apr_id debe ser numero entero"}), 400
 
 
                 if not isinstance(data.get("cur_id"), int):
-                    return jsonify({"mensaje": "el cur_id debe ser numero entero"}), 400
+                    return jsonify({"respuesta": "el cur_id debe ser numero entero"}), 400
 
 
 
@@ -49,7 +49,7 @@ class matriculaController:
         if x == 200:
             jsonify ({"mensaje": f"se elimino la matricula con el uuid:{uuid}"}),200
         else:
-            return jsonify({"mensaje": f"no se encontro la matricula con el uuid{uuid}"}),404
+            return jsonify({"respuesta": f"no se encontro la matricula con el uuid{uuid}"}),404
 
 
 
@@ -65,9 +65,9 @@ class matriculaController:
     
             x = matriculaService.update(uuid, data)
             if x == 200:
-                return jsonify({"mensaje": f"se actualizo la matricula con uuid: {uuid}"}), 200
+                return jsonify({"respuesta": f"se actualizo la matricula con uuid: {uuid}"}), 200
             else:
-                return jsonify({"mensaje": f"no se encontro la matricula con uuid: {uuid}"}), 404
+                return jsonify({"respuesta": f"no se encontro la matricula con uuid: {uuid}"}), 404
 
 
 
