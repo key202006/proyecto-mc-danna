@@ -70,7 +70,7 @@ class aprendizService:
             return "No se encontro la persona "
         id_per = Persona(data[0])
         c.close()
-        return id_per
+        return id_apr
 
 
 
