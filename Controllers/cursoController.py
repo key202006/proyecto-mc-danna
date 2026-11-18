@@ -40,7 +40,7 @@ class cursoController:
             
              
             x = cursoService.add(data)
-            return jsonify(x),201
+            return jsonify({"respuesta": "se registro!!"}),201
 
 
 
