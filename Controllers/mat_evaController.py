@@ -32,7 +32,7 @@ class mat_evaController:
 
 
                 x = mat_evaService.add(data)
-                return jsonify(x),201
+                return jsonify({"respuesta": "se registro!!"}),201
                 
                 
                 
