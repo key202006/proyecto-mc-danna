@@ -55,6 +55,6 @@ class personaService:
         data = c.fetchone()
         if data is None:
             return "No se encontro la persona "
-        id_per = Persona(data[0])
+        # id_per = Persona(data[0])
         c.close()
         return id_per
