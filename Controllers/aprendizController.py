@@ -1,7 +1,7 @@
-
-from flask import jsonify,request
+from flask import jsonify, request
 from Services.aprendizService import aprendizService
 from Services.personaService import personaService
+import re
 
 
 class aprendizController:
@@ -12,43 +12,44 @@ class aprendizController:
 
     def add():
         data = request.get_json(silent=True)
-        if data is None :
+        if data is None:
             return jsonify({"respuesta": "json invalido"}), 400
-        campo_req = ("fecha_nac","per_id")
+        
+        campo_req = ("fecha_nac", "per_id")
         faltantes = [W for W in campo_req if W not in data]
 
-        if len(faltantes) > 0 :
-            return jsonify({"respuesta":f"faltan parametros {faltantes}"}), 400
+        if len(faltantes) > 0:
+            return jsonify({"respuesta": f"faltan parametros {faltantes}"}), 400
 
         if not isinstance(data.get("per_id"), int):
             return jsonify({"respuesta": "el id de la persona debe ser un entero"}), 400  
 
         if not isinstance(data.get("fecha_nac"), str) or not re.match(r"^\d{4}-\d{2}-\d{2}$", data.get("fecha_nac")):
-            return jsonify({"respuesta": "el formato de fecha es invalido  debe ser yyyy-mm-dd"}), 400
+            return jsonify({"respuesta": "el formato de fecha es invalido debe ser yyyy-mm-dd"}), 400
         
         if personaService.get_by_id(data["per_id"]) == "No se encontro la persona ":
             return jsonify({"respuesta": "la persona no existe"}), 400
 
         x = aprendizService.add(data)
-         return jsonify({"respuesta": "se registro!!"}),201
+        return jsonify({"respuesta": "se registro!!"}), 201
 
     def delete(uuid):
         x = aprendizService.delete(uuid)
         if x == 200:
-            return jsonify ({"respuesta": f"se elimino el aprendiz con uuid :{uuid}"}), 200
+            return jsonify({"respuesta": f"se elimino el aprendiz con uuid :{uuid}"}), 200
         else:
-            return jsonify ({"respuesta": f"no se encontro el recurso uuid :{uuid}"}), 404
+            return jsonify({"respuesta": f"no se encontro el recurso uuid :{uuid}"}), 404
 
     def update(uuid):
         data = request.get_json()
-        campos_req = ['fecha_nac','per_id']
+        campos_req = ['fecha_nac', 'per_id']
         faltantes = [w for w in campos_req if w not in data]
 
         if len(faltantes) > 0:
             return jsonify({"faltan campos": faltantes}), 400
 
         x = personaService.get_by_id(data["per_id"])
-        if x is None :
+        if x is None:
             return jsonify({"no existe la persona": x}), 400
 
         x = aprendizService.update(uuid, data)
